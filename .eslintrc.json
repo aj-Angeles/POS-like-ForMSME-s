@@ -1,0 +1,33 @@
+{
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": [
+          {
+            "group": ["@supabase/*", "**/lib/supabase/*"],
+            "message": "Components must not import Supabase directly. Use a hook from /hooks or a service from /lib/services.",
+            "importNames": ["createClient", "createServerClient", "createBrowserClient"]
+          }
+        ]
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "lib/**/*",
+        "hooks/**/*",
+        "app/**/actions.ts",
+        "app/api/**/*",
+        "middleware.ts",
+        "app/(auth)/**/*",
+        "app/setup/**/*",
+        "app/page.tsx",
+        "app/(app)/layout.tsx"
+      ],
+      "rules": { "no-restricted-imports": "off" }
+    }
+  ]
+}

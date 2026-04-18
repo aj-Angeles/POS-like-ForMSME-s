@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * THEMING SYSTEM
+ * ──────────────
+ * All colors are HSL triplets (H S% L%) so Tailwind can wrap them with hsl().
+ * Every business record can persist a `theme` JSON column (primary, accent,
+ * radius). On login the theme loader in components/theme/theme-provider.tsx
+ * overwrites these variables on :root at runtime — no rebuild required.
+ *
+ * DEFAULT ACCENT:  aquamarine / teal  (hsl 172 66% 42%)
+ * To rebrand: edit --primary below OR change the business theme in Settings.
+ */
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222 20% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 20% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 20% 12%;
+
+    /* Aquamarine / teal — override per business at runtime */
+    --primary: 172 66% 42%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 20% 96%;
+    --secondary-foreground: 222 20% 20%;
+
+    --muted: 210 20% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 172 66% 95%;
+    --accent-foreground: 172 66% 25%;
+
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 142 72% 38%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 24 70% 14%;
+
+    --border: 215 16% 90%;
+    --input: 215 16% 90%;
+    --ring: 172 66% 42%;
+
+    --radius: 0.6rem;
+
+    /* Sidebar (dark on desktop per spec) */
+    --sidebar: 222 28% 11%;
+    --sidebar-foreground: 210 20% 92%;
+  }
+
+  .dark {
+    --background: 222 28% 8%;
+    --foreground: 210 20% 95%;
+    --card: 222 28% 11%;
+    --card-foreground: 210 20% 95%;
+    --popover: 222 28% 11%;
+    --popover-foreground: 210 20% 95%;
+    --primary: 172 66% 46%;
+    --primary-foreground: 222 28% 8%;
+    --secondary: 222 20% 18%;
+    --secondary-foreground: 210 20% 95%;
+    --muted: 222 20% 18%;
+    --muted-foreground: 215 14% 65%;
+    --accent: 172 40% 22%;
+    --accent-foreground: 172 66% 80%;
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 142 60% 45%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 55%;
+    --warning-foreground: 24 70% 14%;
+    --border: 222 20% 20%;
+    --input: 222 20% 20%;
+    --ring: 172 66% 46%;
+    --sidebar: 222 28% 6%;
+    --sidebar-foreground: 210 20% 92%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
+  }
+
+  /* Prevent iOS zoom on input focus */
+  @media (max-width: 640px) {
+    input,
+    select,
+    textarea {
+      font-size: 16px;
+    }
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: white !important;
+  }
+}
